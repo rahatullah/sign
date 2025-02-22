@@ -1,0 +1,33 @@
+# Add your Python package dependencies here
+# Format: package_name==version
+# Example:
+# flask==2.0.1
+# requests==2.26.0
+
+# Core deep learning
+torch>=2.1.0
+torchvision>=0.16.0
+tqdm
+numpy
+efficientnet-pytorch
+
+# NLP and metrics
+nltk
+sacrebleu
+rouge-score
+
+# Image and video processing
+opencv-python
+Pillow
+mediapipe
+psutil
+
+# Data handling
+pandas
+openpyxl  # For Excel file support
+
+# Optional CUDA tools
+nvidia-cuda-runtime-cu11>=11.8
+nvidia-cuda-nvrtc-cu11>=11.8
+nvidia-cuda-cupti-cu11>=11.8
+nvidia-cudnn-cu11>=8.7.0 
