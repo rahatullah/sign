@@ -1,8 +1,0 @@
-{
-    "batch_size": 1,
-    "num_workers": 0,
-    "image_size": 8,
-    "model_path": "models/best_model_20250221_210000.pt",
-    "device": "cuda",
-    "max_decoding_length": 50
-}
