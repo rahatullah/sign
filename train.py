@@ -353,13 +353,23 @@ def train(batch_size=None, epochs=50, learning_rate=1e-4, checkpoint_path=None,
                     try:
                         # Process single frame
                         frames = batch['frames'].to(device, non_blocking=True)
+                        # Get the original sequences from the batch
                         gloss = batch['gloss'].to(device, non_blocking=True)
                         text = batch['text'].to(device, non_blocking=True)
-                        
-                        with torch.amp.autocast(device_type='cuda', enabled=is_gpu):
-                            gloss_out, text_out = model(frames, gloss_targets=gloss, text_targets=text)
-                            loss = (criterion(gloss_out.view(-1, gloss_out.size(-1)), gloss.view(-1)) +
-                                   criterion(text_out.view(-1, text_out.size(-1)), text.view(-1))) / gradient_accumulation_steps
+
+                        # Shift the sequences:
+                        # Decoder input: all tokens except the last
+                        gloss_input = gloss[:, :-1]
+                        text_input = text[:, :-1]
+                        # Target for loss: all tokens except the first (<sos> token)
+                        gloss_target = gloss[:, 1:]
+                        text_target = text[:, 1:]
+
+                        with torch.amp.autocast(device_type='cuda', enabled=torch.cuda.is_available()):
+                            gloss_out, text_out = model(frames, gloss_targets=gloss_input, text_targets=text_input)
+                            loss = (criterion(gloss_out.view(-1, gloss_out.size(-1)), gloss_target.view(-1)) +
+                                    criterion(text_out.view(-1, text_out.size(-1)), text_target.view(-1))) / gradient_accumulation_steps
+
                         
                         loss_value = loss.item() * gradient_accumulation_steps
                         
