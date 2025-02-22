@@ -1,3 +1,0 @@
-{"epoch": 1, "avg_loss": 10.152264459560527, "best_metrics": {"bleu4": 0.0, "chrf": 0.0, "rouge_l": 0.0}, "timestamp": "2025-02-22T16:17:13.461569"}
-{"epoch": 2, "avg_loss": 6.1458068503132, "best_metrics": {"bleu4": 0.0, "chrf": 0.0, "rouge_l": 0.0}, "timestamp": "2025-02-22T18:44:14.593409"}
-{"epoch": 3, "avg_loss": 3.884872962011963, "best_metrics": {"bleu4": 0.0, "chrf": 0.0, "rouge_l": 0.0}, "timestamp": "2025-02-22T21:10:08.047215"}
